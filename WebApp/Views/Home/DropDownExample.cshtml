@@ -1,0 +1,26 @@
+﻿@model WebApp.Models.DropDownExampleModel
+
+@{
+    ViewBag.Title = "DropDownExample";
+}
+
+<br/>
+
+<div class="row">
+    <div class="col">
+        @Html.DropDownListFor(m=>m.MainDropDownId, Model.SelectListItems, new
+        {
+            @class = "form-control",
+            onchange="dropdownSelect(this);"
+        })
+    </div>
+    <div class="col">
+        @Html.DropDownListFor(m => m.DependentId, Model.Items, new
+        {
+            @class = "form-control"
+        })
+    </div>
+</div>
+
+@Html.ScriptInitiate()
+@Html.ScriptAssignment("window.urls.getDependent", Url.Content("~/Home/GetDependent"))
