@@ -1,28 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using WebApp.Models.Data;
 
-namespace WebApp.Models
+namespace WebApp.Models.Reps
 {
-    public class DataModel
-    {
-        public long Id { get; set; }
-        public string Title { get; set; }
-        public DateTime Date { get; set; }
-        public long ForeignKey { get; set; }
-    }
-
-    public class DropDownExampleModel
-    {
-        public string MainDropDownId { get; set; }
-        public IEnumerable<SelectListItem> SelectListItems { get; set; }
-        public string DependentId { get; set; }
-        public IEnumerable<SelectListItem> Items { get; set; }
-    }
-
-    public interface IRep<in TId, T>
+    public interface IRepSimple<in TId, T>
     {
         List<T> Get(string filter = null);
         List<T> GetDependent(TId id);
@@ -31,11 +14,11 @@ namespace WebApp.Models
         List<T> Delete(TId id);
     }
 
-    public class Rep : IRep<long, DataModel>
+    public class RepSimple : IRepSimple<long, DataModel>
     {
         private static List<DataModel> _list;
 
-        public Rep()
+        public RepSimple()
         {
             _list = new List<DataModel>()
             {

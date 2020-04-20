@@ -140,7 +140,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Action\ActionEx.cs" />
-    <Compile Include="Models\Rep.cs" />
+    <Compile Include="Models\Data\DataModel.cs" />
+    <Compile Include="Models\Data\DropDownExampleModel.cs" />
+    <Compile Include="Models\Data\ObjectTableRow.cs" />
+    <Compile Include="Models\Reps\Rep.cs" />
+    <Compile Include="Models\View\ProgramTableRow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
