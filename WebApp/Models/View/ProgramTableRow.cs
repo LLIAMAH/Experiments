@@ -19,6 +19,6 @@ namespace WebApp.Models.View
         public decimal Premium { get; set; }
         public bool Manual { get; set; }
 
-        public List<ProgramTableRow> Sub { get; set; }
+        public bool HasSub { get; set; }
     }
 }

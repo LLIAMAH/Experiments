@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using WebApp.Models.Data;
+using WebApp.Models.View;
 
 namespace WebApp.Models.Reps
 {
-    public class RepTable : IRepSimple<long, ProgramDbTableRow>
+    public class RepTable : IRepSimple<long, ProgramTableRow>
     {
         private static List<ProgramDbTableRow> _list;
 
@@ -32,32 +33,60 @@ namespace WebApp.Models.Reps
             }
         }
 
-        public List<ProgramDbTableRow> Get(string filter = null)
+        public List<ProgramTableRow> Get(string filter = null)
         {
-            return _list.Where(o => o.ParentId == null).ToList();
-        }
-
-        public List<ProgramDbTableRow> GetDependent(long id)
-        {
-            return _list.Where(o => o.ParentId == id)
+            return _list.Where(o => o.ParentId == null)
+                .Select(o => new ProgramTableRow()
+                {
+                    Id = o.Id,
+                    Manual = o.Manual,
+                    Premium = o.Premium,
+                    CoverPrc = o.CoverPrc,
+                    LimitLevel = o.LimitLevel,
+                    LimitTypeCode = o.LimitTypeCode,
+                    Name = o.Name,
+                    PremiumPerPerson = o.PremiumPerPerson,
+                    ProgramType = o.ProgramType,
+                    SumInsured = o.SumInsured,
+                    SumPerVisit = o.SumPerVisit,
+                    SumPerVisitNc = o.SumPerVisitNc,
+                    VisitPerPolicy = o.VisitPerPolicy,
+                    HasSub = GetDependent(o.Id).Any()
+                })
                 .ToList();
         }
 
-        public List<ProgramDbTableRow> Add(ProgramDbTableRow item)
+        public List<ProgramTableRow> GetDependent(long id)
         {
-            _list.Add(item);
-
-            return _list;
+            return _list.Where(o => o.ParentId == id)
+                .Select(o=> new ProgramTableRow()
+                {
+                    Id = o.Id,
+                    Manual = o.Manual,
+                    Premium = o.Premium,
+                    CoverPrc = o.CoverPrc,
+                    LimitLevel = o.LimitLevel,
+                    LimitTypeCode = o.LimitTypeCode,
+                    Name = o.Name,
+                    PremiumPerPerson = o.PremiumPerPerson,
+                    ProgramType = o.ProgramType,
+                    SumInsured = o.SumInsured,
+                    SumPerVisit = o.SumPerVisit,
+                    SumPerVisitNc = o.SumPerVisitNc,
+                    VisitPerPolicy = o.VisitPerPolicy,
+                    HasSub = GetDependent(o.Id).Any()
+                })
+                .ToList();
         }
 
-        public List<ProgramDbTableRow> Delete(long id)
+        public List<ProgramTableRow> Add(ProgramTableRow item)
         {
-            var exists = _list.SingleOrDefault(o => o.Id == id);
-            if (exists == null)
-                return _list;
+            return Get();
+        }
 
-            _list.Remove(exists);
-            return _list;
+        public List<ProgramTableRow> Delete(long id)
+        {
+            return Get();
         }
     }
 }
