@@ -13,10 +13,13 @@
         <a class="navbar-brand">Navbar</a>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                @Html.ActionLink("Home", "Index", "Home", null, new {@class = "nav-link"})
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
             </li>
             <li class="nav-item">
                 @Html.ActionLink("DropDowns", "DropDownExample", "Home", null, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("TableData", "Index", "TableData", null, new { @class = "nav-link" })
             </li>
         </ul>
         <form class="form-inline">

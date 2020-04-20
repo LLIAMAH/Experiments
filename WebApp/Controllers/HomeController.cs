@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using WebApp.Models;
+using WebApp.Models.Data;
+using WebApp.Models.Reps;
 
 namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private static IRep<long, DataModel> _rep;
+        private static IRepSimple<long, DataModel> _rep;
         public HomeController()
         {
             if (_rep == null)
-                _rep = new Rep();
+                _rep = new RepSimple();
         }
 
         public ActionResult Index()
