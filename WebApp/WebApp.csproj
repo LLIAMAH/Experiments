@@ -136,6 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TableDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -144,6 +145,8 @@
     <Compile Include="Models\Data\DropDownExampleModel.cs" />
     <Compile Include="Models\Data\ObjectTableRow.cs" />
     <Compile Include="Models\Reps\Rep.cs" />
+    <Compile Include="Models\Reps\RepSimple.cs" />
+    <Compile Include="Models\Reps\RepTable.cs" />
     <Compile Include="Models\View\ProgramTableRow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -295,6 +298,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\TableData\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
