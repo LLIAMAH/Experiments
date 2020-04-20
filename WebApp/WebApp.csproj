@@ -298,7 +298,9 @@
     <Content Include="Views\Home\DropDownExample.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\TableData\Index.cshtml" />
-    <Content Include="Views\Shared\ProgramDbTableRow.cshtml" />
+    <Content Include="Views\Shared\ProgramDbTable.cshtml" />
+    <Content Include="Views\Shared\EditTableRow.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ProgramTableRow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -42,21 +42,19 @@ namespace WebApp.Models.Reps
                     Manual = o.Manual,
                     Premium = o.Premium,
                     CoverPrc = o.CoverPrc,
-                    LimitLevel = o.LimitLevel,
-                    LimitTypeCode = o.LimitTypeCode,
                     Name = o.Name,
-                    PremiumPerPerson = o.PremiumPerPerson,
                     ProgramType = o.ProgramType,
                     SumInsured = o.SumInsured,
                     SumPerVisit = o.SumPerVisit,
                     SumPerVisitNc = o.SumPerVisitNc,
                     VisitPerPolicy = o.VisitPerPolicy,
-                    HasSub = GetDependent(o.Id).Any()
+                    RootId = o.Id,
+                    HasSub = GetDependent(o.Id, o.Id).Any()
                 })
                 .ToList();
         }
 
-        public List<ProgramTableRow> GetDependent(long id)
+        public List<ProgramTableRow> GetDependent(long id, long rootId)
         {
             return _list.Where(o => o.ParentId == id)
                 .Select(o=> new ProgramTableRow()
@@ -65,16 +63,14 @@ namespace WebApp.Models.Reps
                     Manual = o.Manual,
                     Premium = o.Premium,
                     CoverPrc = o.CoverPrc,
-                    LimitLevel = o.LimitLevel,
-                    LimitTypeCode = o.LimitTypeCode,
                     Name = o.Name,
-                    PremiumPerPerson = o.PremiumPerPerson,
                     ProgramType = o.ProgramType,
                     SumInsured = o.SumInsured,
                     SumPerVisit = o.SumPerVisit,
                     SumPerVisitNc = o.SumPerVisitNc,
                     VisitPerPolicy = o.VisitPerPolicy,
-                    HasSub = GetDependent(o.Id).Any()
+                    RootId = rootId,
+                    HasSub = GetDependent(o.Id, rootId).Any()
                 })
                 .ToList();
         }
@@ -87,6 +83,45 @@ namespace WebApp.Models.Reps
         public List<ProgramTableRow> Delete(long id)
         {
             return Get();
+        }
+
+        public ProgramTableRow Update(long id, ProgramTableRow item)
+        {
+            var existing = _list.FirstOrDefault(o => o.Id == id);
+            if (existing == null)
+                return null;
+
+            existing.Apply(item);
+            var root = GetParent(existing.Id);
+            if (root == null)
+                return null;
+
+            return new ProgramTableRow()
+            {
+                Id = root.Id,
+                Manual = root.Manual,
+                Premium = root.Premium,
+                CoverPrc = root.CoverPrc,
+                Name = root.Name,
+                ProgramType = root.ProgramType,
+                SumInsured = root.SumInsured,
+                SumPerVisit = root.SumPerVisit,
+                SumPerVisitNc = root.SumPerVisitNc,
+                VisitPerPolicy = root.VisitPerPolicy,
+                HasSub = GetDependent(root.Id, root.Id).Any()
+            };
+        }
+
+        private ProgramDbTableRow GetParent(long itemId)
+        {
+            var item = _list.SingleOrDefault(o => o.Id == itemId);
+            if (item == null)
+                return null;
+
+            if (item.ParentId == null || item.ParentId.Value == 0)
+                return item;
+
+            return GetParent(item.ParentId.Value);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace WebApp.Models.Data
+﻿using WebApp.Models.View;
+
+namespace WebApp.Models.Data
 {
     public class ProgramDbTableRow
     {
@@ -17,5 +19,22 @@
         public decimal SumPerVisitNc { get; set; }
         public decimal Premium { get; set; }
         public bool Manual { get; set; }
+    }
+
+    public static class ProgramTableRowEx
+    {
+        public static void Apply(this ProgramDbTableRow item, ProgramTableRow model)
+        {
+            item.Id = model.Id;
+            item.Name = model.Name;
+            item.SumInsured = model.SumInsured;
+            item.CoverPrc = model.CoverPrc;
+            item.SumPerVisit = model.SumPerVisit;
+            item.VisitPerPolicy = model.VisitPerPolicy;
+            item.ProgramType = model.ProgramType;
+            item.SumPerVisitNc = model.SumPerVisitNc;
+            item.Premium = model.Premium;
+            item.Manual = model.Manual;
+        }
     }
 }

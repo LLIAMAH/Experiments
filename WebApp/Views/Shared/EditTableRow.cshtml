@@ -1,0 +1,83 @@
+﻿@model WebApp.Models.View.ProgramTableRow
+
+
+@using (Ajax.BeginForm("EditTableRowItem", null, new AjaxOptions()
+{
+    AllowCache = false,
+    HttpMethod = "post",
+    OnSuccess = "editTableRowSuccess(data," + @Model.Id + ");",
+}, null))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Name)
+            @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.SumInsured)
+            @Html.EditorFor(model => model.SumInsured, new {htmlAttributes = new {@class = "form-control"}})
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.CoverPrc)
+            @Html.EditorFor(model => model.CoverPrc, new {htmlAttributes = new {@class = "form-control"}})
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.SumPerVisit)
+            @Html.EditorFor(model => model.SumPerVisit, new {htmlAttributes = new {@class = "form-control"}})
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.VisitPerPolicy)
+            @Html.EditorFor(model => model.VisitPerPolicy, new {htmlAttributes = new {@class = "form-control"}})
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.ProgramType)
+            @Html.EditorFor(model => model.ProgramType, new {htmlAttributes = new {@class = "form-control"}})
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.SumPerVisitNc)
+            @Html.EditorFor(model => model.SumPerVisitNc, new {htmlAttributes = new {@class = "form-control"}})
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Premium)
+            @Html.EditorFor(model => model.Premium, new {htmlAttributes = new {@class = "form-control"}})
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="custom-control custom-checkbox">
+                @Html.EditorFor(model => model.Manual, new {htmlAttributes = new {@class = "custom-control-input"}})
+                @*<input type="checkbox" class="custom-control-input" id="customCheck1">*@
+                @Html.LabelFor(model => model.Manual, htmlAttributes: new {@class = "custom-control-label"})
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Premium)
+            @Html.EditorFor(model => model.Premium, new {htmlAttributes = new {@class = "form-control"}})
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="offset-10 col-2">
+            <input type="submit" value="Save" class="btn btn-success" />
+            <input type="button" value="Cancel" class="btn btn-default" onclick="editItemClose(this, @Model.Id);" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

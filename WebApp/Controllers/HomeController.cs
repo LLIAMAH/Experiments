@@ -48,7 +48,7 @@ namespace WebApp.Controllers
             if (dependentId == null)
                 return Json(new SelectList(new List<DataModel>(), "Id", "Title"));
 
-            var result = _rep.GetDependent(dependentId.Value);
+            var result = _rep.GetDependent(dependentId.Value, 0);
             return Json(new SelectList(result, "Id", "Title"));
         }
 

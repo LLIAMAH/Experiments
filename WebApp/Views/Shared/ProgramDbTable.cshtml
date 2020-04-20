@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebApp.Models.View.ProgramTableRow>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">
+        </th>
+        <th scope="col" style="width: 100px;">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.SumInsured)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.CoverPrc)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.SumPerVisit)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.VisitPerPolicy)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.ProgramType)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.SumPerVisitNc)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Premium)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.Manual)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody id="tableDbOut">
+        @foreach (var item in Model)
+        {
+            @Html.DisplayFor(m => item)
+        }
+    </tbody>
+</table>

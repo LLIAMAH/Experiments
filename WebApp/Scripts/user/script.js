@@ -44,6 +44,10 @@ function dropdownSelect(element) {
 }
 
 function getSubItems(element, parentId) {
+    if (OpenedForEdit) {
+        alert("Item opened for edit - close it first.");
+        return;
+    }
     let el = $(element);
     let row = el.closest("tr");
 
@@ -63,8 +67,56 @@ function getSubItems(element, parentId) {
 }
 
 function closeSubItems(element, parentId) {
+    if (OpenedForEdit) {
+        alert("Item opened for edit - close it first.");
+        return;
+    }
+
     let el = $(element);
     $("#row_" + parentId).remove();
     el.hide();
     $("#buttonOpenSub_" + parentId).show();
+}
+
+var OpenedForEdit = false;
+
+function editItemOpen(element, id) {
+    OpenedForEdit = true;
+    let el = $(element);
+    let ctrl = $("#editItem_" + id);
+    $("#editOpen_" + id).hide();
+    $("#editClose_" + id).show();
+    ctrl.show();
+    
+}
+
+function editItemClose(element, id) {
+    OpenedForEdit = false;
+    let el = $(element);
+    let ctrl = $("#editItem_" + id);
+    $("#editOpen_" + id).show();
+    $("#editClose_" + id).hide();
+    ctrl.hide();
+}
+
+function deleteItem(element, id) {
+
+}
+
+function editTableRowSuccess(data, id) {
+    var result = $(data);
+    var current = $("#editItem_" + id);
+    $(current).attr("id", "temp");
+    $(current).insertBefore(result);
+    $(current).remove();
+}
+
+function hasHash(id) {
+    if (id == null || id.length < 1)
+        return "";
+
+    if (id[0] !== '#')
+        id = '#' + id;
+
+    return id;
 }

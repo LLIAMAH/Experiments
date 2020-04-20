@@ -10,8 +10,7 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@Html.Partial("ProgramDbTableRow", Model)
-
+@Html.Partial("ProgramDbTable", Model)
 
 @Html.ScriptInitiate()
 @Html.ScriptAssignment("window.urls.getSubItems", Url.Content("~/TableData/GetDependent"))

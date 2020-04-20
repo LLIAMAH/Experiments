@@ -44,7 +44,7 @@ namespace WebApp.Models.Reps
                 .ToList();
         }
 
-        public List<DataModel> GetDependent(long id)
+        public List<DataModel> GetDependent(long id, long rootId)
         {
             return _list.Where(o => o.ForeignKey == id).ToList();
         }
@@ -73,6 +73,17 @@ namespace WebApp.Models.Reps
 
             _list?.Remove(existing);
             return Get(null);
+        }
+
+        public DataModel Update(long id, DataModel item)
+        {
+            var existing = _list.FirstOrDefault(o => o.Id == id);
+            if (existing == null)
+                return null;
+
+            existing = item;
+
+            return existing;
         }
     }
 }

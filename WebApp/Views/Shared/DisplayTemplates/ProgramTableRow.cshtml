@@ -1,0 +1,48 @@
+﻿@model WebApp.Models.View.ProgramTableRow
+
+<tr id="rowId_@Model.Id">
+    <td>
+        @if (Model.HasSub)
+        {
+            <button id="buttonOpenSub_@Model.Id" type="button" class="btn btn-dark" onclick="getSubItems(this, @Model.Id);">&gt;</button>
+            <button id="buttonCloseSub_@Model.Id" type="button" class="btn btn-dark" onclick="closeSubItems(this, @Model.Id);" style="display: none;">&lt;</button>
+        }
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => modelItem.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => modelItem.SumInsured)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => modelItem.CoverPrc)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => modelItem.SumPerVisit)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => modelItem.VisitPerPolicy)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => modelItem.ProgramType)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => modelItem.SumPerVisitNc)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => modelItem.Premium)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => modelItem.Manual)
+    </td>
+    <td>
+        <button id="editOpen_@Model.Id" type="button" class="btn btn-info btn-sm" onclick="editItemOpen(this, @Model.Id);">...</button>
+        <button id="editClose_@Model.Id" type="button" class="btn btn-info btn-sm" onclick="editItemClose(this, @Model.Id);" style="display: none;">...</button>
+        <button type="button" class="btn btn-danger" onclick="deleteItem(this, @Model.Id);">D</button>
+    </td>
+</tr>
+<tr id="editItem_@Model.Id" style="display: none;">
+    <td colspan="11">
+        @Html.Partial("EditTableRow", Model)
+    </td>
+</tr>
