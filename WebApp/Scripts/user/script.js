@@ -1,4 +1,4 @@
-﻿/// <reference path="../jquery-3.4.1.intellisense.js" />
+﻿/// <reference path="../jquery-3.5.0.intellisense.js" />
 
 function filterData(id) {
     let value = $(id).val();
@@ -41,5 +41,30 @@ function dropdownSelect(element) {
             $("#DependentId").empty().populate(result);
         }
     });
+}
 
+function getSubItems(element, parentId) {
+    let el = $(element);
+    let row = el.closest("tr");
+
+    $.ajax({
+        type: "post",
+        url: window.urls.getSubItems,
+        data: {
+            dependentId: parentId
+        },
+        async: false,
+        success: function (result) {
+            row.after("<tr id='row_" + parentId + "'><td colspan='14'>" + result + "</td></tr>");
+            el.hide();
+            $("#buttonCloseSub_" + parentId).show();
+        }
+    });
+}
+
+function closeSubItems(element, parentId) {
+    let el = $(element);
+    $("#row_" + parentId).remove();
+    el.hide();
+    $("#buttonOpenSub_" + parentId).show();
 }

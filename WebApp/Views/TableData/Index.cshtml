@@ -1,0 +1,17 @@
+﻿@model IEnumerable<WebApp.Models.View.ProgramTableRow>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@Html.Partial("ProgramDbTableRow", Model)
+
+
+@Html.ScriptInitiate()
+@Html.ScriptAssignment("window.urls.getSubItems", Url.Content("~/TableData/GetDependent"))
