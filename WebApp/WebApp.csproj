@@ -143,7 +143,7 @@
     <Compile Include="Helpers\Action\ActionEx.cs" />
     <Compile Include="Models\Data\DataModel.cs" />
     <Compile Include="Models\Data\DropDownExampleModel.cs" />
-    <Compile Include="Models\Data\ObjectTableRow.cs" />
+    <Compile Include="Models\Data\ProgramDbTableRow.cs" />
     <Compile Include="Models\Reps\Rep.cs" />
     <Compile Include="Models\Reps\RepSimple.cs" />
     <Compile Include="Models\Reps\RepTable.cs" />
@@ -295,10 +295,11 @@
     <Content Include="Views\Shared\TableOutput.cshtml" />
     <Content Include="Views\Home\DropDownExample.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\TableData\Index.cshtml" />
+    <Content Include="Views\Shared\ProgramDbTableRow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\TableData\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
