@@ -1,4 +1,4 @@
-﻿/// <reference path="../jquery-3.4.1.intellisense.js" />
+﻿/// <reference path="../jquery-3.5.0.intellisense.js" />
 
 function filterData(id) {
     let value = $(id).val();
